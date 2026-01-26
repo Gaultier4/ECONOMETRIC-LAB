@@ -1,0 +1,13 @@
+[server]
+port = 9000
+enableCORS = false
+enableXsrfProtection = false
+enableWebsocketCompression = false
+headless = true
+address = "127.0.0.1"
+maxUploadSize = 200
+
+[browser]
+gatherUsageStats = false
+serverAddress = "127.0.0.1"
+serverPort = 9000
