@@ -5,6 +5,7 @@ import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
 from plotly.subplots import make_subplots
+import os
 
 # Econometrics & Stats
 import statsmodels.api as sm
@@ -150,6 +151,13 @@ with st.sidebar:
     
     if uploaded_file:
         df_raw = load_data(uploaded_file)
+    elif os.path.exists("DATASET_VF.csv"):
+        df_raw = pd.read_csv("DATASET_VF.csv")
+        st.info("Loaded default dataset: DATASET_VF.csv")
+    else:
+        st.stop()
+
+    if 'df_raw' in locals():
         
         with st.expander("📅 Date & Frequency", expanded=True):
             date_col = st.selectbox("Date Column", df_raw.columns)
@@ -176,9 +184,6 @@ with st.sidebar:
              st.session_state['data_original'] = df_raw.copy()  # Backup
              st.session_state['transform_history'] = []  # Track transformations
              st.rerun()
-             
-    else:
-        st.stop()
 
 # --- MAIN LAYOUT ---
 st.title("📊 Econometrics Lab")
